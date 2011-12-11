@@ -3,51 +3,47 @@
  *
  * @author kurtextrem <kurtextrem@gmail.com>
  * @license CC BY-SA http://creativecommons.org/licenses/by-sa/3.0/
- * @copyright 2011-XXXX
- * @version 1.0
+ * @copyright 2011
+ * @version 1.1
  * @jquery >= 1.7.0
- *
  */
 
 (function($){
-	$.fn.tCounter = function(options) {
+	$.fn.tCounter = function(counterID, options) {
 		var _this = $(this);
-		var settings = {
-			maxChar: 140,
-			color: {
+		var settings = {			// settings
+			maxChar: 140,			// how many chars are allowed?
+			color: {			// colors for the counter
 				0: [
 					'140',
-					'#999'
+					'#999'		// grey, like twitter
 				],
 				1: [
-					'19',
-					'#5C0002'
+					'19',		// from 19-11
+					'#5C0002'	// a darker red
 				],
 				2: [
-					'10',
-					'#D40D12'
+					'10',		// from 10- -infinity
+					'#D40D12'	// a red
 				]
-			},
-			counterID: '#counter',
-			counterHTML: '<div></div>',
-			cursor: 'default'
+			}
 		}
-		$.extend(settings, options);
+		$.extend(settings, options);		// extend the default settings with user input.
 
-		if($(settings.counterID).length == 0)
-			_this.after($(settings.counterHTML).attr('id', settings.counterID.replace('#', '')).css('cursor', settings.cursor));
-
-		_this.on('keypress keydown keyup', function(){
-			var counter = $(settings.counterID);
-			var length = (settings.maxChar)-(_this.val().length);
-			var colorObj = settings.color;
-			var color = colorObj[0][1];
-			if(length <= colorObj[1][0])
-				color = colorObj[1][1];
-			if(length <= colorObj[2][0])
-				color = colorObj[2][1];
+		// the main function
+		_this.on('keypress keydown keyup', function(){		// we need keypress for keyrepeats, keydown for return, shift etc and keyup for 'good' counting.
+			var counter = $(counterID);			// the counter jQuery Obj
+			var length = (settings.maxChar)-(_this.val().length);	// count down (for example 140-20 = 120 chars left)
+			var colorObj = settings.color;			// the colors
+			var color = colorObj[0][1];			// the default color
+			if(length <= colorObj[1][0])			// if it's under 19...
+				color = colorObj[1][1];			// ...use the color.
+			if(length <= colorObj[2][0])			// if it's under 10...
+				color = colorObj[2][1];			// ...use the color.
 			
-			counter.text(length).css('color', color);
+			counter.text(length).css('color', color);	// finaly write how many chars.
 		});
+		
+		// returning something now would make no sense I think.
 	}
 })(jQuery);

@@ -5,13 +5,15 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
 	<body>
+		You can find a more stylish demo here: <a href="http://kurtextrem.github.com/tCounter">Click</a>.<br>
 		<textarea id="textarea"></textarea>
+		<div id="counter"></div>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="tCounter.jquery.js"></script>
+		<script src="tCounter.jquery.min.js"></script>
 		<script>
-			$.fn.ready(function(){
-				$('#textarea').tCounter();
+			$.fn.ready(function(){ // the fastest way http://jsperf.com/ready
+				$('#textarea').tCounter('#counter');
 			})
 		</script>
 	</body>
