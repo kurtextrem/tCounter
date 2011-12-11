@@ -51,7 +51,8 @@
 
     
       <p>This is a tiny jQuery Counter (in Twitter Style). It contains only 519 bytes Code (without first line and minified).
-It's really easy to use.</p>
+It's really easy to use.
+      Try here:<br><textarea id="textarea"></textarea><div id="counter"></div></p>
     
 
     
@@ -74,12 +75,12 @@ It's really easy to use.</p>
 
     
       <h2>Authors</h2>
-      <p>kurtextrem<br/>      </p>
+      <p>kurtextrem</p>
     
 
     
       <h2>Contact</h2>
-      <p>kurtextrem (kurtextrem@gmail.com)<br/>      </p>
+      <p>kurtextrem@gmail.com</p>
     
 
     <h2>Download</h2>
@@ -98,6 +99,13 @@ It's really easy to use.</p>
     </div>
 
   </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  	<script src="tCounter.jquery.min.js"></script>
+		<script>
+			$.fn.ready(function(){ // the fastest way http://jsperf.com/ready
+				$('#textarea').tCounter('#counter');
+			})
+		</script>
 
 </body>
 </html>
