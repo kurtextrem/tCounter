@@ -1,12 +1,14 @@
 # tCounter
-A tiny (332 bytes) counter in Twitter Style.
+A 320 bytes (without copyright) counter in Twitter style colors.
 
 # Usage
-`<script> $('textarea').tCounter('#counter'); </script>`
+1. Include tCounter.jquery.min.js `<script src="tCounter.jquery.min.js"></script>`
+2. Include the tCounter styles (only one line)
 
-You can change the maxchars like that:
+`<script>$('textarea').tCounter('counterID');</script>`
 
-`<script> $('textarea').tCounter('#counter', {maxChars: 200}); </script>`
+You can "extend" it easy like that:
+`<script>$('textarea').tCounter('counterID', {maxChars: 200});</script>`
 
 # Demo
 [Here.](http://kurtextrem.github.com/tCounter)

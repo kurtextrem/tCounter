@@ -1,49 +1,41 @@
 /**
- * A tiny jQuery Counter (in Twitter Style).
+ * A tiny jQuery counter (in Twitter style).
  *
- * @author kurtextrem <kurtextrem@gmail.com>
- * @license CC BY-SA http://creativecommons.org/licenses/by-sa/3.0/
- * @copyright 2011
- * @version 1.1
- * @jquery >= 1.7.0
+ * @author 	kurtextrem <kurtextrem@gmail.com>
+ * @license	LGPL
+ * @copyright 	2012
+ * @version 	1.2
+ * @jquery 	>= 1.7.0
  */
 
-(function($){
-	$.fn.tCounter = function(counterID, options) {
-		var _this = $(this);
-		var settings = {			// settings
-			maxChar: 140,			// how many chars are allowed?
-			color: {			// colors for the counter
-				0: [
-					'140',
-					'#999'		// grey, like twitter
-				],
-				1: [
-					'19',		// from 19-11
-					'#5C0002'	// a darker red
-				],
-				2: [
-					'10',		// from 10- -infinity
-					'#D40D12'	// a red
-				]
+!function($) {
+	$.fn.tCounter = function(counterInputID, options) {
+		var $this = $(this),							// the textarea
+			settings = {							// settings
+				maxChar: 140,						// how many chars should allowed?
+				color: {						// colors for the counter
+					140:	'',						// #555, grey, like twitter,
+					19:	'alert',					// from 19 - 11; #5c0002 a darker red
+					10:	'warn'						// from 10 - -infinity; #d40d12 a red
+				}
 			}
-		}
-		$.extend(settings, options);		// extend the default settings with user input.
+		$.extend(settings, options)						// extend the default settings with developer options.
 
 		// the main function
-		_this.on('keypress keydown keyup', function(){		// we need keypress for keyrepeats, keydown for return, shift etc and keyup for 'good' counting.
-			var counter = $(counterID);			// the counter jQuery Obj
-			var length = (settings.maxChar)-(_this.val().length);	// count down (for example 140-20 = 120 chars left)
-			var colorObj = settings.color;			// the colors
-			var color = colorObj[0][1];			// the default color
-			if(length <= colorObj[1][0])			// if it's under 19...
-				color = colorObj[1][1];			// ...use the color.
-			if(length <= colorObj[2][0])			// if it's under 10...
-				color = colorObj[2][1];			// ...use the color.
-			
-			counter.text(length).css('color', color);	// finaly write how many chars.
-		});
+		$this.on('keydown keyup', function() {					// we need both for a) repeating key press without going up b) Return, Enter etc.
+			var counter = document.getElementById(counterInputID),			// the counter jQuery Obj
+				length = settings.maxChar-$this.val().length			// count down (for example 140-20 = 120 chars left)
+
+			counter.value = length							// finally write how many chars...
+
+			$.each(settings.color, function(chars, classToAdd) {
+				if (length <= chars)
+					counter.classList.add(classToAdd)			// and style it (with default color),
+				else
+					counter.classList.remove(classToAdd)			// or unstyle it.
+			})
+		})
 		
-		// returning something now would make no sense I think.
+		return $this
 	}
-})(jQuery);
+}(jQuery)
