@@ -50,37 +50,32 @@
     </div>
 
     
-      <p>This is a tiny jQuery Counter (in Twitter Style).<br>It contains only 332 bytes Code (without first line and minified).
-<br>It's really easy to use.<br>
-      Try here:<br><textarea id="textarea"></textarea><div id="counter"></div></p>
-    
-
+      <p>This is a tiny jQuery Counter (in Twitter style).<br>It contains only 32ß bytes Code (without first line and minified).</p>
+      <p>It's really easy to use.</p>
+      <p> Try it out here:
+      <div>
+      	<textarea id="textarea"></textarea>
+      	<div><input id="counter"></div>
+      </div>
     
       <h2>Dependencies</h2>
       <p>jQuery 1.7.0 (because of .on)</p>
     
-
-    
       <h2>Install</h2>
-      <p>- Download tCounter. (.min for production, without .min for debugging)<br>
-	- Embed it in your site.
-	<br>- Add this Javascript-Code: <code>$('textarea').tCount('#counterElem');</code>
-	<br>- You're done!</p>
-    
-
+      <p>- Download tCounter. (.min for production, without .min for debugging)</p>
+      <p>- Embed it in your site.</p>
+      <p>- Add this Javascript-Code: <code>$('textarea').tCount('counterInputID');</code></p>
+      <p>- Add the one line of tCounter.css to your stylesheets</p>
+      <p>- You're done!</p>
     
       <h2>License</h2>
-      <p>http://creativecommons.org/licenses/by-sa/3.0/</p>
+      <p>http://www.gnu.org/licenses/lgpl.html</p>
     
-
-    
-      <h2>Authors</h2>
+      <h2>Author</h2>
       <p>kurtextrem</p>
     
-
-    
       <h2>Contact</h2>
-      <p>kurtextrem@gmail.com</p>
+      <p><a href="http://kurtextrem.de">Here</a></p>
     
 
     <h2>Download</h2>
@@ -99,13 +94,13 @@
     </div>
 
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  	<script src="https://raw.github.com/kurtextrem/tCounter/master/tCounter.jquery.min.js"></script>
-		<script>
-			$.fn.ready(function(){ // the fastest way http://jsperf.com/ready
-				$('#textarea').tCounter('#counter');
-			})
-		</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://raw.github.com/kurtextrem/tCounter/master/tCounter.jquery.min.js"></script>
+  <script>
+	$.fn.ready(function(){ // the fastest way http://jsperf.com/ready
+		$('#textarea').tCounter('counter');
+	})
+  </script>
 
 </body>
 </html>
