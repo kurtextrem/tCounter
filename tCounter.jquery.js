@@ -9,33 +9,45 @@
  */
 
 !function($) {
-	$.fn.tCounter = function(counterInputID, options) {
-		var $this = $(this),							// the textarea
-			settings = {							// settings
-				maxChar: 140,						// how many chars should allowed?
-				color: {						// colors for the counter
-					140:	'',						// #555, grey, like twitter,
-					19:	'alert',					// from 19 - 11; #5c0002 a darker red
-					10:	'warn'						// from 10 - -infinity; #d40d12 a red
-				}
-			}
-		$.extend(settings, options)						// extend the default settings with developer options.
-
-		// the main function
-		$this.on('keydown keyup', function() {					// we need both for a) repeating key press without going up b) Return, Enter etc.
-			var counter = document.getElementById(counterInputID),			// the counter jQuery Obj
-				length = settings.maxChar-$this.val().length			// count down (for example 140-20 = 120 chars left)
-
-			counter.value = length							// finally write how many chars...
-
-			$.each(settings.color, function(chars, classToAdd) {
-				if (length <= chars)
-					counter.classList.add(classToAdd)			// and style it (with default color),
-				else
-					counter.classList.remove(classToAdd)			// or unstyle it.
-			})
-		})
+	$.fn.tCounter.defaults = {
+		maxChars: 140,
+		ranges: {			// char ranges to classes (index: char limit, value: index of 'cls' array)
+			140: 0,			// #555, grey, like twitter,
+			19:	1,			// from 19 - 11; #5c0002 a darker red
+			10:	2			// from 10 - -infinity; #d40d12 a red
+		},
+		cls: ['', 'alert', 'warn'],
 		
-		return $this
+		$input: null,
+		$counter: null,
+		_cls: '' // joined classes
 	}
-}(jQuery)
+	
+	$.fn.tCounter = function(counterInputID, options) {
+		options = $.extend({}, options, $.fn.tCounter.defaults)
+		options.$counter = $('#' + counterInputID) 
+		options._cls = options.cls.join(' ')
+		
+		return options.$input = $(this)
+			.on('keyup keydown', function (e) {
+				tCounter(options)
+			})
+			.on('input', function() {
+				options.$input.off('keydown') // input is supported, turn off keydown + keyup#
+				tCounter(options)
+			})
+	}
+	
+	function tCounter(options) {
+		var	left = settings.maxChars - options.$input.val().length // XXX chars left
+		options.$counter.val(left).text(left)
+		
+		var cls = ''
+		$.each(options.ranges, function (cLeft, clsI) {
+			if (cLeft <= left)
+				cls = options.cls[clsI]
+		})
+		options.$counter.removeClass(options._cls)
+		options.$counter.addClass(clsI)
+	}
+}(jQuery);
