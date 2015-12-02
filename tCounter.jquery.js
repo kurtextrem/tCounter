@@ -1,14 +1,13 @@
 /**
  * A tiny jQuery counter (in Twitter style).
  *
- * @author 	kurtextrem <kurtextrem@gmail.com>
- * @license	LGPL
- * @copyright 	2012
- * @version 	1.2
- * @jquery 	>= 1.7.0
+ * @author 		kurtextrem <kurtextrem@gmail.com>
+ * @license		LGPL
+ * @copyright 	2015
+ * @version 	1.3
+ * @jquery 		>= 1.7.0
  */
-
-!function($) {
++function($) {
 	$.fn.tCounter.defaults = {
 		maxChars: 140,
 		ranges: {			// char ranges to classes (index: char limit, value: index of 'cls' array)
@@ -20,11 +19,11 @@
 		
 		$input: null,
 		$counter: null,
-		_cls: '' // joined classes
+		_cls: '' 			// joined classes
 	}
 	
 	$.fn.tCounter = function(counterInputID, options) {
-		options = $.extend({}, options, $.fn.tCounter.defaults)
+		options = $.extend({}, $.fn.tCounter.defaults, options)
 		options.$counter = $('#' + counterInputID) 
 		options._cls = options.cls.join(' ')
 		
@@ -39,7 +38,7 @@
 	}
 	
 	function tCounter(options) {
-		var	left = settings.maxChars - options.$input.val().length // XXX chars left
+		var left = settings.maxChars - options.$input.val().length // XXX chars left
 		options.$counter.val(left).text(left)
 		
 		var cls = ''
